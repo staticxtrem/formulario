@@ -1,0 +1,41 @@
+body {
+       font-family: Arial, sans-serif;
+   }
+
+   label {
+       display: block;
+       margin-bottom: 30px;
+   }
+
+   input[type="text"] {
+       width: 30%;
+       padding: 10px;
+       border-radius: 15px;
+       border: 2px solid #ccc;
+       margin-bottom: 30px;
+   }
+
+   input[type="tel"] {
+       width: 30%;
+       padding: 10px;
+       border-radius: 15px;
+       border: 2px solid #ccc;
+       margin-bottom: 30px;
+   }
+
+   input[type="email"] {
+       width: 30%;
+       padding: 10px;
+       border-radius: 15px;
+       border: 2px solid #ccc;
+       margin-bottom: 30px;
+   }
+
+   button {
+       background-color: #af4c4c;
+       color: white;
+       padding: 15px;
+       border: none;
+       border-radius: 10px;
+       cursor: pointer;
+   }
