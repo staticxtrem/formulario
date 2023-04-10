@@ -1,6 +1,5 @@
 function obtenerFechaHoraActual() {
     const fecha = new Date();
-
     const dia = fecha.getDate().toString().padStart(2, '0');
     const mes = (fecha.getMonth() + 1).toString().padStart(2, '0');
     const anio = fecha.getFullYear();
@@ -22,14 +21,28 @@ function actualizarFechaHora() {
 }
 
 function copiar() {
-
     const fechaHoraActual = obtenerFechaHoraActual();
-
     const texto = `Fecha: ${fechaHoraActual.fecha}\nHora: ${fechaHoraActual.hora}`;
     navigator.clipboard.writeText(texto);
-
-    alert('La información se ha copiado');
+    
 }
 
 actualizarFechaHora();
 setInterval(actualizarFechaHora, 1000);
+
+function copiar() {
+    var nombre = document.getElementById("nombre");
+    var email = document.getElementById("email");
+    var telefono = document.getElementById("telefono");
+    var fecha = document.getElementById('fecha');
+    var hora = document.getElementById('hora');
+    var texto = "Nombre: " + nombre.value + "\n" +
+        "Email: " + email.value + "\n" +
+        "Teléfono: " + telefono.value + "\n" +
+        "Fecha: " + fecha.value + "\n" +
+        "Hora: " + hora.value;
+    
+    navigator.clipboard.writeText(texto);
+    alert('La información se ha copiado');
+}
+
