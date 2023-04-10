@@ -2,63 +2,22 @@
 <html>
 
 <head>
+    <link rel="stylesheet" href="style.css">
     <title>Formulario</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 30px;
-        }
-
-        input[type="text"] {
-            width: 30%;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid #ccc;
-            margin-bottom: 30px;
-        }
-
-        input[type="tel"] {
-            width: 30%;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid #ccc;
-            margin-bottom: 30px;
-        }
-
-        input[type="email"] {
-            width: 30%;
-            padding: 10px;
-            border-radius: 15px;
-            border: 2px solid #ccc;
-            margin-bottom: 30px;
-        }
-
-        button {
-            background-color: #af4c4c;
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
     <h1>Formulario</h1>
     <form>
         <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+        <input type="text" id="nombre" name="nombre" required placeholder="Escribir Nombre">
 
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <input type="email" id="email" name="email" required placeholder="Escribir Email">
 
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required>
+        <input type="tel" id="telefono" name="telefono" required placeholder="Escribir Telefono">
+
         <label for="fecha">Fecha:</label>
         <input type="text" id="fecha" readonly>
         <label for="hora">Hora:</label>
@@ -66,20 +25,7 @@
         <button type="button" onclick="copiar()">Copiar</button>
     </form>
     <script src="script.js"></script>
-    <script>
-        document.getElementById("copiar").addEventListener("click", function () {
-            var nombre = document.getElementById("nombre");
-            var email = document.getElementById("email");
-            var telefono = document.getElementById("telefono");
-
-            var texto = "Nombre: " + nombre.value + "\n" +
-                "Email: " + email.value + "\n" +
-                "Teléfono: " + telefono.value;
-
-            navigator.clipboard.writeText(texto);
-            alert("¡Copiado al portapapeles!");
-        });
-    </script>
+    
 </body>
 
 </html>
