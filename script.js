@@ -24,7 +24,7 @@ function copiar() {
     const fechaHoraActual = obtenerFechaHoraActual();
     const texto = `Fecha: ${fechaHoraActual.fecha}\nHora: ${fechaHoraActual.hora}`;
     navigator.clipboard.writeText(texto);
-    
+
 }
 
 actualizarFechaHora();
@@ -32,16 +32,18 @@ setInterval(actualizarFechaHora, 1000);
 
 function copiar() {
     var nombre = document.getElementById("nombre");
+    var campana = document.getElementById( "campana");
     var email = document.getElementById("email");
     var telefono = document.getElementById("telefono");
     var fecha = document.getElementById('fecha');
     var hora = document.getElementById('hora');
-    var texto = "Nombre: " + nombre.value + "\n" +
+    var texto = "Asesor: " + nombre.value + "\n" +
+        + "Campana DID: " + campana.value + "\n" +
         "Email: " + email.value + "\n" +
         "Teléfono: " + telefono.value + "\n" +
         "Fecha: " + fecha.value + "\n" +
         "Hora: " + hora.value;
-    
+
     navigator.clipboard.writeText(texto);
     alert('La información se ha copiado');
 }
