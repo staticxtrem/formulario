@@ -4,7 +4,7 @@ body {
 
    label {
        display: block;
-       margin-bottom: 30px;
+       margin-bottom: 10px;
    }
 
    input[type="text"] {
@@ -12,7 +12,7 @@ body {
        padding: 10px;
        border-radius: 15px;
        border: 2px solid #ccc;
-       margin-bottom: 30px;
+       margin-bottom: 20px;
    }
 
    input[type="tel"] {
@@ -20,7 +20,7 @@ body {
        padding: 10px;
        border-radius: 15px;
        border: 2px solid #ccc;
-       margin-bottom: 30px;
+       margin-bottom: 20px;
    }
 
    input[type="email"] {
@@ -28,7 +28,7 @@ body {
        padding: 10px;
        border-radius: 15px;
        border: 2px solid #ccc;
-       margin-bottom: 30px;
+       margin-bottom: 20px;
    }
 
    button {
@@ -36,6 +36,9 @@ body {
        color: white;
        padding: 15px;
        border: none;
+       border-radius: 10px;
+       cursor: pointer;
+   }
        border-radius: 10px;
        cursor: pointer;
    }
