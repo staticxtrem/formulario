@@ -33,7 +33,13 @@
         <button type="button" onclick="copiarFormulario()">Copiar</button>
     </form>
 
+    <div id="copias"></div>
+    <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
+
     <script>
+        var contadorCopias = 0;
+        var copias = [];
+
         function copiarFormulario() {
             var fechaHora = new Date().toLocaleString();
             var asesor = document.getElementById("asesor").value;
@@ -44,10 +50,30 @@
             var comentarios = document.getElementById("comentarios").value;
             var contenido = "Asesor: " + asesor + "\n" + "Campaña/DID: " + campana + "\n" + "Lead: " + lead + "\n" + "Teléfono: " + telefono + "\n" + "Fecha y hora: " + fechaHora + "\n" + "Marcación: " + marcacion + "\n" + "Comentarios: " + comentarios + "\n";
             document.getElementById("fechaHora").value = fechaHora;
-            navigator.clipboard.writeText(contenido);
+
+            // Agregar copia al arreglo
+            contadorCopias++;
+            copias.push(contenido);
+
+            // Mostrar copias en la sección de copias
+            var copiasHtml = "";
+            for (var i = 0; i < copias.length; i++) {
+                copiasHtml += "<div>Copia " + (i + 1) + ":<br>" + copias[i] + "</div>";
+            }
+            document.getElementById("copias").innerHTML = copiasHtml;
+
+            // Copiar formulario individual y todas las copias creadas
+            var contenidoTotal = contenido + copias.join("\n");
+            navigator.clipboard.writeText(contenidoTotal);
+
             alert("El formulario ha sido copiado correctamente.");
         }
+        function copiarTodasCopias() {
+                var contenido = copias.join("\n");
+                navigator.clipboard.writeText(contenido);
+                alert("Todas las copias han sido copiadas correctamente.");
+            }
     </script>
-</body>
-
-</html>
+    </body>
+    
+    </html>
