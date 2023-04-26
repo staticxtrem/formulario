@@ -2,37 +2,52 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="styles.css">
     <title>Formulario</title>
 </head>
 
 <body>
     <h1>Formulario</h1>
+
     <form>
-        <label for="nombre">Asesor:</label>
-        <input type="text" id="nombre" name="nombre" required placeholder="Escribir Nombre">
-        <label for="nombre1">Campana DID:</label>
-        <input type="text" id="campana" name="campana" required placeholder="Escribir Campaña DID">
-       
+        <label for="asesor">Asesor:</label>
+        <input type="text" id="asesor"><br>
 
+        <label for="campana">Campaña/DID:</label>
+        <input type="text" id="campana"><br>
 
-
-
-
-<label for="email">Email:</label>
-        <input type="email" id="email" name="email" required placeholder="Escribir Email">
+        <label for="lead">Lead:</label>
+        <input type="text" id="lead"><br>
 
         <label for="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required placeholder="Escribir Telefono">
+        <input type="text" id="telefono"><br>
 
-        <label for="fecha">Fecha:</label>
-        <input type="text" id="fecha" readonly>
-        <label for="hora">Hora:</label>
-        <input type="text" id="hora" readonly><br><br>
-        <button type="button" onclick="copiar()">Copiar</button>
+        <label for="fechaHora">Fecha y hora:</label>
+        <input type="text" id="fechaHora" disabled><br>
+
+        <label for="marcacion">Marcación:</label>
+        <input type="text" id="marcacion"><br>
+
+        <label for="comentarios">Comentarios:</label>
+        <textarea id="comentarios"></textarea><br>
+
+        <button type="button" onclick="copiarFormulario()">Copiar</button>
     </form>
-    <script src="script.js"></script>
 
+    <script>
+        function copiarFormulario() {
+            var fechaHora = new Date().toLocaleString();
+            var asesor = document.getElementById("asesor").value;
+            var campana = document.getElementById("campana").value;
+            var lead = document.getElementById("lead").value;
+            var telefono = document.getElementById("telefono").value;
+            var marcacion = document.getElementById("marcacion").value;
+            var comentarios = document.getElementById("comentarios").value;
+            var contenido = "Asesor: " + asesor + "\n" + "Campaña/DID: " + campana + "\n" + "Lead: " + lead + "\n" + "Teléfono: " + telefono + "\n" + "Fecha y hora: " + fechaHora + "\n" + "Marcación: " + marcacion + "\n" + "Comentarios: " + comentarios + "\n";
+            document.getElementById("fechaHora").value = fechaHora;
+            navigator.clipboard.writeText(contenido);
+            alert("El formulario ha sido copiado correctamente.");
+        }
+    </script>
 </body>
 
 </html>
