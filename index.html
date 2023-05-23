@@ -12,29 +12,23 @@
         <label for="asesor">Asesor:</label>
         <input type="text" id="asesor"><br>
 
-        <label for="campana">Campaña/DID:</label>
-        <input type="text" id="campana"><br>
-
         <label for="lead">Lead:</label>
         <input type="text" id="lead"><br>
-
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono"><br>
 
         <label for="fechaHora">Fecha y hora:</label>
         <input type="text" id="fechaHora" disabled><br>
 
-        <label for="marcacion">Marcación:</label>
-        <input type="text" id="marcacion"><br>
-
+        <label for="campana">Campaña/DID:</label>
+        <input type="text" id="campana"><br>
+        
         <label for="comentarios">Comentarios:</label>
         <textarea id="comentarios"></textarea><br>
 
-        <button type="button" onclick="copiarFormulario()">Copiar</button>
+        <button type="button" onclick="copiarFormulario()">Agregar</button>
     </form>
 
     <div id="copias"></div>
-    <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
+    <button type="button" onclick="copiarTodasCopias()">Copiar todo</button>
 
     <script>
         var contadorCopias = 0;
@@ -45,10 +39,8 @@
             var asesor = document.getElementById("asesor").value;
             var campana = document.getElementById("campana").value;
             var lead = document.getElementById("lead").value;
-            var telefono = document.getElementById("telefono").value;
-            var marcacion = document.getElementById("marcacion").value;
             var comentarios = document.getElementById("comentarios").value;
-            var contenido = "Asesor: " + asesor + "\n" + "Campaña/DID: " + campana + "\n" + "Lead: " + lead + "\n" + "Teléfono: " + telefono + "\n" + "Fecha y hora: " + fechaHora + "\n" + "Marcación: " + marcacion + "\n" + "Comentarios: " + comentarios + "\n";
+            var contenido = asesor + ","+ lead +","+ fechaHora + "," + campana +","+ comentarios ;
             document.getElementById("fechaHora").value = fechaHora;
 
             // Agregar copia al arreglo
@@ -65,15 +57,13 @@
             // Copiar formulario individual y todas las copias creadas
             var contenidoTotal = contenido + copias.join("\n");
             navigator.clipboard.writeText(contenidoTotal);
-
-            alert("El formulario ha sido copiado correctamente.");
         }
         function copiarTodasCopias() {
-                var contenido = copias.join("\n");
-                navigator.clipboard.writeText(contenido);
-                alert("Todas las copias han sido copiadas correctamente.");
-            }
+            var contenido = copias.join("\n");
+            navigator.clipboard.writeText(contenido);
+            alert("Todas las copias han sido copiadas correctamente.");
+        }
     </script>
-    </body>
-    
-    </html>
+</body>
+
+</html>
