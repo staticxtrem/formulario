@@ -30,7 +30,6 @@
        <select id="campana">
 			<option value="Alabama">Alabama</option>
 			<option value="Arizona">Arizona</option>
-			<option value="Alaska">Alaska</option>
 			<option value="Arkansas">Arkansas</option>
             <option value="California">California</option>
 			<option value="Carolina del Norte">Carolina del Norte</option>
@@ -93,7 +92,7 @@
             document.getElementById("copias").innerHTML = copiasHtml;
 
             // Copiar formulario individual y todas las copias creadas
-            var contenidoTotal = contenido + copias.join("\n");
+            var contenidoTotal = contenido;
             navigator.clipboard.writeText(contenidoTotal);
         }
         function copiarTodasCopias() {
