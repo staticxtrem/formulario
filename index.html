@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-    <link rel="stylesheet" href="css/styles.css" />
+    <style>
+        #copias {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+    </style>
     <title>Formulario</title>
 </head>
 
@@ -12,13 +16,13 @@
 
     <form>
         <label for="asesor">Asesor:</label>
-		<select id="asesor">
-			<option value="Cristofer Gaerste">Cristofer Gaerste</option>
-			<option value="Maria la Cruz">Maria la Cruz</option>
-			<option value="Camilo Sierra">Camilo Sierra</option>
-			<option value="Amanda Montalvo">Amanda Montalvo</option>
-                        <option value="Kevin Hincapie">Kevin Hincapie</option>
-		</select><br>
+        <select id="asesor">
+            <option value="Cristofer Gaerste">Cristofer Gaerste</option>
+            <option value="Maria la Cruz">Maria la Cruz</option>
+            <option value="Camilo Sierra">Camilo Sierra</option>
+            <option value="Amanda Montalvo">Amanda Montalvo</option>
+            <option value="Kevin Hincapie">Kevin Hincapie</option>
+        </select><br>
 
         <label for="lead">Lead:</label>
         <input type="text" id="lead"><br>
@@ -27,34 +31,35 @@
         <input type="text" id="fechaHora" disabled><br>
 
         <label for="campana">Campaña/DID:</label>
-       <select id="campana">
-			<option value="Alabama">Alabama</option>
-			<option value="Arizona">Arizona</option>
-			<option value="Arkansas">Arkansas</option>
-                        <option value="California">California</option>
-			<option value="Carolina del Norte">Carolina del Norte</option>
-			<option value="Carolina del Sur">Carolina del Sur</option>
-			<option value="Colorado">Colorado</option>
-                        <option value="Conneticut">Conneticut</option>
-                        <option value="Dakota del Norte">Dakota del Norte</option>
-			<option value="Dakota del Sur">Dakota del Sur</option>
-			<option value="Florida">Florida</option>
-			<option value="Massachussets">Massachussets</option>
-                        <option value="New Jersey">New Jersey</option>
-                        <option value="Texas">Texas</option>
-			<option value="Virginia">Virginia</option>
-			<option value="Pennsylvania">Pennsylvania</option>
-			<option value="Maryland">Maryland</option>
-                        <option value="Washington">Washington</option>
-                        <option value="Puerto Rico">Puerto Rico</option>
-			<option value="New York">New York</option>
-			<option value="Kentucky">Kentucky</option>
-		</select><br>
+        <select id="campana">
+            <option value="Alabama">Alabama</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="California">California</option>
+            <option value="Carolina del Norte">Carolina del Norte</option>
+            <option value="Carolina del Sur">Carolina del Sur</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Conneticut">Conneticut</option>
+            <option value="Dakota del Norte">Dakota del Norte</option>
+            <option value="Dakota del Sur">Dakota del Sur</option>
+            <option value="Florida">Florida</option>
+            <option value="Massachussets">Massachussets</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="Texas">Texas</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Washington">Washington</option>
+            <option value="Puerto Rico">Puerto Rico</option>
+            <option value="New York">New York</option>
+            <option value="Kentucky">Kentucky</option>
+        </select><br>
+
         <label for="intentos">Intentos:</label>
         <select id="intentos">
-            <option value="1 intento">1 intento</option>
-            <option value="2 intentos">2 intentos</option>
             <option value="3 intentos">3 intentos</option>
+            <option value="2 intentos">2 intentos</option>
+            <option value="1 intentos">1 intentos</option>
         </select><br>
 
         <label for="comentarios">Comentarios:</label>
@@ -64,37 +69,34 @@
     </form>
 
     <div id="copias"></div>
-    <button type="button" onclick="copiarTodasCopias()">Copiar todo</button>
+    <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
 
     <script>
-        var contadorCopias = 0;
         var copias = [];
 
         function copiarFormulario() {
-            var fechaHora = new Date().toLocaleString([], { hour: 'numeric', minute: '2-digit', hour12: true });
+            var fechaHora = new Date().toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true });
             var asesor = document.getElementById("asesor").value;
             var campana = document.getElementById("campana").value;
             var lead = document.getElementById("lead").value;
             var intentos = document.getElementById("intentos").value;
             var comentarios = document.getElementById("comentarios").value;
-            var contenido = asesor + ","+ lead +","+ fechaHora + "," + campana +","+ intentos + "," + comentarios ;
+            var contenido =  "(" + asesor + ")" + lead + "(" + fechaHora + ")"+ "(" + campana + ")" + "" + intentos + "," + comentarios;
             document.getElementById("fechaHora").value = fechaHora;
 
             // Agregar copia al arreglo
-            contadorCopias++;
             copias.push(contenido);
 
             // Mostrar copias en la sección de copias
-            var copiasHtml = "";
-            for (var i = 0; i < copias.length; i++) {
-                copiasHtml += "<div>Copia " + (i + 1) + ":<br>" + copias[i] + "</div>";
-            }
-            document.getElementById("copias").innerHTML = copiasHtml;
+            var copiasHtml = copias.map(function (copia, index) {
+                return "<div>Copia " + (index + 1) + ":<br>" + copia + "</div>";
+            });
+            document.getElementById("copias").innerHTML = copiasHtml.join("");
 
-            // Copiar formulario individual y todas las copias creadas
-            var contenidoTotal = contenido;
-            navigator.clipboard.writeText(contenidoTotal);
+            // Copiar formulario individual
+            navigator.clipboard.writeText(contenido);
         }
+
         function copiarTodasCopias() {
             var contenido = copias.join("\n");
             navigator.clipboard.writeText(contenido);
