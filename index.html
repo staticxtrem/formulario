@@ -68,32 +68,38 @@
         <button type="button" onclick="copiarFormulario()">Agregar</button>
     </form>
 
-    <div id="copias"></div>
     <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
+    <div id="contadorCopias"></div>
+    <div id="contadorCopiasPorHoras"></div>
+    <div id="copias"></div>
 
     <script>
         var copias = [];
+        var contadorCopias = 0;
+        var contadorCopiasPorHoras = {};
 
         function copiarFormulario() {
-            var fechaHora = new Date().toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true });
+            var fechaHora = obtenerFechaHoraFormato12Horas();
             var asesor = document.getElementById("asesor").value;
             var campana = document.getElementById("campana").value;
             var lead = document.getElementById("lead").value;
             var intentos = document.getElementById("intentos").value;
             var comentarios = document.getElementById("comentarios").value;
-            var contenido =  "(" + asesor + ")" + lead + "(" + fechaHora + ")"+ "(" + campana + ")" + "" + intentos + "," + comentarios;
-            document.getElementById("fechaHora").value = fechaHora;
-
-            // Agregar copia al arreglo
+            var contenido = "(" + asesor + ")" + lead + "(" + fechaHora + ")" + "(" + campana + ")" + "" + intentos + "," + comentarios;
+            document.getElementById("fechaHora").value = fechaHora;            
             copias.push(contenido);
-
-            // Mostrar copias en la sección de copias
+            contadorCopias++;        
+            var horaActual = new Date().getHours();
+            if (contadorCopiasPorHoras[horaActual]) {
+                contadorCopiasPorHoras[horaActual]++;
+            } else {
+                contadorCopiasPorHoras[horaActual] = 1;
+            }
             var copiasHtml = copias.map(function (copia, index) {
                 return "<div>Copia " + (index + 1) + ":<br>" + copia + "</div>";
             });
             document.getElementById("copias").innerHTML = copiasHtml.join("");
-
-            // Copiar formulario individual
+            actualizarContadoresHTML();
             navigator.clipboard.writeText(contenido);
         }
 
@@ -101,6 +107,26 @@
             var contenido = copias.join("\n");
             navigator.clipboard.writeText(contenido);
             alert("Todas las copias han sido copiadas correctamente.");
+        }
+
+        function obtenerFechaHoraFormato12Horas() {
+            var fechaHora = new Date();
+            var opciones = { year: 'numeric', month: '2-digit', day: '2-digit', hour: 'numeric', minute: '2-digit', hour12: true };
+            return fechaHora.toLocaleString([], opciones);
+        }
+
+        function actualizarContadoresHTML() {
+            var contadorHtml = "Total copias: " + contadorCopias;
+            var contadorPorHorasHtml = "Copias por horas: ";
+
+            for (var hora in contadorCopiasPorHoras) {
+                var hora12 = hora % 12 === 0 ? 12 : hora % 12;
+                var amPm = hora < 12 ? "am" : "pm";
+                contadorPorHorasHtml += hora12 + " " + amPm + ": " + contadorCopiasPorHoras[hora] + ", ";
+            }
+
+            document.getElementById("contadorCopias").innerHTML = contadorHtml;
+            document.getElementById("contadorCopiasPorHoras").innerHTML = contadorPorHorasHtml;
         }
     </script>
 </body>
