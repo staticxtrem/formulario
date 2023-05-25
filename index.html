@@ -20,6 +20,7 @@
         h1 {
             text-align: center;
         }
+
         #copias {
             max-height: 150px;
             overflow-y: auto;
@@ -45,6 +46,26 @@
                 max-width: 100%;
                 margin: 0;
             }
+
+            .checklist {
+                display: flex;
+                align-items: center;
+                margin-bottom: 5px;
+            }
+
+            .checklist input[type="checkbox"] {
+                margin-right: 5px;
+            }
+
+            .checklist label {
+                text-decoration: none;
+                cursor: pointer;
+            }
+
+            .checklist input[type="checkbox"]:checked+label {
+                text-decoration: line-through;
+            }
+
         }
     </style>
     <title>Formulario</title>
@@ -104,13 +125,40 @@
         <label for="comentarios">Comentarios:</label>
         <textarea id="comentarios"></textarea><br>
 
-        <button type="button" onclick="copiarFormulario()">Agregar</button><br>
+        <button type="button" onclick="copiarFormulario()">Agregar</button>
         <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
         <button type="button" onclick="guardarCopiasEnArchivo()">Guardar copias en archivo de texto</button>
-        
+
+        <div class="checklist">
+            <input type="checkbox" id="check1">
+            <select id="llamadas manuales">
+                <option value="20 llamadas manuales por hora">20 llamadas manuales por hora</option>
+                <option value="30 llamadas manuales por hora">30 llamadas manuales por hora</option>
+                <option value="40 llamadas manuales por hora">40 llamadas manuales por hora</option>
+            </select>
+        </div>
+
+        <div class="checklist">
+            <input type="checkbox" id="check2">
+            <select id="llamadas efectivas">
+                <option value="1 llamada efectivas">1 llamada efectiva</option>
+                <option value="2 llamadas efectivas">2 llamadas efectivas</option>
+                <option value="3 llamadas efectivas">3 llamadas efectivas</option>
+                <option value="4 llamadas efectivas">4 llamadas efectivas</option>
+                <option value="5 llamadas efectivas">5 llamadas efectivas</option>
+                <option value="6 llamada efectivas">1 llamada efectiva</option>
+                <option value="7 llamadas efectivas">2 llamadas efectivas</option>
+                <option value="8 llamadas efectivas">3 llamadas efectivas</option>
+                <option value="9 llamadas efectivas">4 llamadas efectivas</option>
+                <option value="10 llamadas efectivas">5 llamadas efectivas</option>
+                <option value="mas de 10 llamadas efectivas">mas de 10 llamadas efectivas</option>
+
+            </select>
+        </div>
+
     </form>
-<div id="contadorCopias"></div>
-<div id="contadorCopiasPorHoras"></div>
+    <div id="contadorCopias"></div>
+    <div id="contadorCopiasPorHoras"></div>
     <div id="copias"></div>
     <script>
         var copias = [];
@@ -168,7 +216,7 @@
             document.getElementById("contadorCopiasPorHoras").innerHTML = contadorPorHorasHtml;
         }
 
-      function guardarCopiasEnArchivo() {
+        function guardarCopiasEnArchivo() {
             var fecha = new Date().toLocaleDateString().replaceAll("/", "-");
             var asesor = document.getElementById("asesor").value.replace(" ", "_");
             var nombreArchivo = asesor + "_" + fecha + ".txt";
