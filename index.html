@@ -65,14 +65,14 @@
         <label for="comentarios">Comentarios:</label>
         <textarea id="comentarios"></textarea><br>
 
-        <button type="button" onclick="copiarFormulario()">Agregar</button>
+        <button type="button" onclick="copiarFormulario()">Agregar</button><br>
+        <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
+        <button type="button" onclick="guardarCopiasEnArchivo()">Guardar copias en archivo de texto</button>
+        
     </form>
-
-    <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
-    <div id="contadorCopias"></div>
-    <div id="contadorCopiasPorHoras"></div>
+<div id="contadorCopias"></div>
+<div id="contadorCopiasPorHoras"></div>
     <div id="copias"></div>
-
     <script>
         var copias = [];
         var contadorCopias = 0;
@@ -86,9 +86,9 @@
             var intentos = document.getElementById("intentos").value;
             var comentarios = document.getElementById("comentarios").value;
             var contenido = "(" + asesor + ")" + lead + "(" + fechaHora + ")" + "(" + campana + ")" + "" + intentos + "," + comentarios;
-            document.getElementById("fechaHora").value = fechaHora;            
+            document.getElementById("fechaHora").value = fechaHora;
             copias.push(contenido);
-            contadorCopias++;        
+            contadorCopias++;
             var horaActual = new Date().getHours();
             if (contadorCopiasPorHoras[horaActual]) {
                 contadorCopiasPorHoras[horaActual]++;
@@ -127,6 +127,30 @@
 
             document.getElementById("contadorCopias").innerHTML = contadorHtml;
             document.getElementById("contadorCopiasPorHoras").innerHTML = contadorPorHorasHtml;
+        }
+
+      function guardarCopiasEnArchivo() {
+            var fecha = new Date().toLocaleDateString().replaceAll("/", "-");
+            var asesor = document.getElementById("asesor").value.replace(" ", "_");
+            var nombreArchivo = asesor + "_" + fecha + ".txt";
+
+            var contenido = "Asesor: " + document.getElementById("asesor").value + "\n";
+            contenido += "Fecha y hora: " + obtenerFechaHoraFormato12Horas() + "\n";
+            contenido += copias.map(function (copia, index) {
+                return (index + 1) + ": " + copia;
+            }).join("\n");
+
+            var blob = new Blob([contenido], { type: "text/plain;charset=utf-8" });
+
+            if (window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(blob, nombreArchivo);
+            } else {
+                var link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = nombreArchivo;
+                link.click();
+                window.URL.revokeObjectURL(link.href);
+            }
         }
     </script>
 </body>
