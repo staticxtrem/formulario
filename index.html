@@ -112,6 +112,19 @@
             <option value="Puerto Rico">Puerto Rico</option>
             <option value="New York">New York</option>
             <option value="Kentucky">Kentucky</option>
+        </select><select id="numeroDID">
+            <option value="01">01</option>
+            <option value="02">02</option>
+            <option value="03">03</option>
+            <option value="04">04</option>
+            <option value="05">05</option>
+            <option value="06">06</option>
+            <option value="07">07</option>
+            <option value="08">08</option>
+            <option value="09">09</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
         </select><br>
 
         <label for="intentos">Intentos:</label>
@@ -122,21 +135,17 @@
         </select><br>
 
         <label for="comentarios">Comentarios:</label>
+        </select><select id="predeterminado">
+            <option value=""></option>
+            <option value="Contestadora">Contestadora</option>
+            <option value="Telefono no disponible">Telefono no disponible</option>           
+        </select>
         <textarea id="comentarios"></textarea><br>
 
         <button type="button" onclick="copiarFormulario()">Agregar</button>
         <button type="button" onclick="pegarPortapapeles()">Pegar</button>
         <button type="button" onclick="copiarTodasCopias()">Copiar todas las copias</button>
         <button type="button" onclick="guardarCopiasEnArchivo()">Guardar copias en archivo de texto</button>
-
-        <div class="checklist">
-            <input type="checkbox" id="check1">
-            <select id="llamadas manuales">
-                <option value="20 llamadas manuales por hora">20 llamadas manuales por hora</option>
-                <option value="30 llamadas manuales por hora">30 llamadas manuales por hora</option>
-                <option value="40 llamadas manuales por hora">40 llamadas manuales por hora</option>
-            </select>
-        </div>
 
         <div class="checklist">
             <input type="checkbox" id="check2">
@@ -169,10 +178,12 @@
             var fechaHora = obtenerFechaHoraFormato12Horas();
             var asesor = document.getElementById("asesor").value;
             var campana = document.getElementById("campana").value;
+            var numeroDID = document.getElementById("numeroDID").value; 
             var lead = document.getElementById("lead").value;
-            var intentos = document.getElementById("intentos").value;
+            var intentos = document.getElementById("intentos").value; 
+            var predeterminado = document.getElementById("predeterminado").value;
             var comentarios = document.getElementById("comentarios").value;
-            var contenido = "(" + asesor + ")" + lead + "(" + fechaHora + ")" + "(" + campana + ")" + "" + intentos + "," + comentarios;
+            var contenido = "(" + asesor + ")" + lead + "(" + fechaHora + ")" + "(" + campana + numeroDID + ")" + "" + intentos + "," +  predeterminado + comentarios;
             document.getElementById("fechaHora").value = fechaHora;
             copias.push(contenido);
             contadorCopias++;
@@ -183,7 +194,7 @@
                 contadorCopiasPorHoras[horaActual] = 1;
             }
             var copiasHtml = copias.map(function (copia, index) {
-                return "<div>Copia " + (index + 1) + ":<br>" + copia + "</div>";
+                return "<div>" + (index + 1) + ":<br>" + copia + "</div>";
             });
             document.getElementById("copias").innerHTML = copiasHtml.join("");
             actualizarContadoresHTML();
@@ -244,6 +255,8 @@
                 document.getElementById("lead").value = text;
             });
         }
+
+            
     </script>
 </body>
 
